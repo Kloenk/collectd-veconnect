@@ -1,6 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-#!/bin/bash
 if [ "$TRAVIS_BRANCH" == "master" ]; then
   if [ "$TRAVIS_RUST_VERSION" == "stable" ]; then
     cargo doc --document-private-items --target-dir public

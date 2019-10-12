@@ -4,6 +4,24 @@ version = "0.1.0"
 authors = ["Kloenk <kloenk@kloenk.de>"]
 edition = "2018"
 
+[lib]
+crate-type = ["cdylib"]
+name = "veconnect"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+bindgen = ["collectd-plugin/bindgen"]
+default = [ ]
+
 [dependencies]
+log = "0.4.8"
+
+[dependencies.collectd-plugin]
+version = "0.10.0"
+features = ["serde"]
+#path = "../collectd-rust-plugin/"
+
+[dependencies.serde]
+version = "1"
+features = ["derive"]

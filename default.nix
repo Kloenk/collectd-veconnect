@@ -21,7 +21,7 @@ let
     CARGO_HOME = "$(mktemp -d cargo-home.XXX)";
     installPhase = ''
       mkdir -p $out/lib;
-      cp target/release/libcollectd-veconnect.so $out/lib/veconnect.so
+      cp target/release/libveconnect.so $out/lib/veconnect.so
     '';
 
     meta = with lib; {
