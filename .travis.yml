@@ -8,6 +8,9 @@ matrix:
     - rust: nightly
   fast_finish: true
 
+before_install:
+  - sudo apt-get install -y collectd
+
 after_success:
   - ./createdoc.sh
 
