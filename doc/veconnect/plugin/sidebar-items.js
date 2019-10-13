@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["DeviceType",""]],"fn":[["parse_u16","parse 4 chars a little endian to u16"]],"struct":[["Data",""],["VePlugin",""]]});

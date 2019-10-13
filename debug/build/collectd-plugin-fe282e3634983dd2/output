@@ -1,0 +1,3 @@
+cargo:rerun-if-env-changed=COLLECTD_VERSION
+cargo:rerun-if-env-changed=COLLECTD_PATH
+cargo:rustc-cfg=collectd55

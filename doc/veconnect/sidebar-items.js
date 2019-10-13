@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["_IMPL_DESERIALIZE_FOR_VeConfig",""],["_IMPL_DESERIALIZE_FOR_VePhoenixConfig",""]],"fn":[["collectd_plugin_complex_config",""],["collectd_plugin_init",""],["module_register",""]],"mod":[["plugin",""]],"static":[["CONFIG_SEEN",""]],"struct":[["Manager",""],["VeConfig",""],["VePhoenixConfig",""],["VePhoenixPlugin",""]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["DeError",""]],"fn":[["from_collectd",""]],"struct":[["Deserializer",""]],"type":[["DeResult","Serde documentation shadows the std's Result type which can be really confusing for Rust newcomers, so we compromise by creating an alias but prefixing with \"De\" to make it standout."]]});
