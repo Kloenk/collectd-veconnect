@@ -5,7 +5,7 @@ use collectd_plugin::{
     collectd_plugin, CollectdLoggerBuilder, ConfigItem, Plugin, PluginManager, PluginRegistration,
 };
 
-use log::{warn, info, LevelFilter};
+use log::{info, warn, LevelFilter};
 
 //use failure::Error;
 use serde::Deserialize;
@@ -40,7 +40,6 @@ pub(crate) struct VePhoenixConfig {
 struct VePhoenixPlugin {
     config: VePhoenixConfig,
 }
-
 
 use plugin::Data;
 struct Manager;
@@ -95,12 +94,12 @@ impl PluginManager for Manager {
         }
 
         let port = config.port.unwrap_or_else(|| {
-                warn!("port not set, falling back to 9104");
-                9104
-            });
+            warn!("port not set, falling back to 9104");
+            9104
+        });
         std::thread::spawn(move || {
+            use std::io::{BufRead, BufReader, Read, Write};
             use std::net::{TcpListener, TcpStream};
-            use std::io::{Write, Read, BufReader, BufRead};
             let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).unwrap();
             let data = Arc::new(Mutex::new(data));
 
@@ -111,8 +110,6 @@ impl PluginManager for Manager {
                     std::thread::spawn(move || {
                         let stream: TcpStream = stream;
                         let mut reader = BufReader::new(stream);
-                        //let mut line = String::new();
-                        //reader.read_line(&mut line);
                         for line in reader.lines() {
                             let line = line.unwrap_or_else(|e| {
                                 info!("line empty: {}", e);
@@ -123,17 +120,29 @@ impl PluginManager for Manager {
                                 info!("line is not len 2");
                                 continue;
                             }
-                            let data = data.lock().map_err(|e| ()).and_then(|v| {
-                                match v.get(line[0]) {
+                            let data = data
+                                .lock()
+                                .map_err(|e| {
+                                    warn!("unable to lock data hashmap: {}", e);
+                                    ()
+                                })
+                                .and_then(|v| match v.get(line[0]) {
                                     Some(v) => Ok(v.clone()),
                                     None => Err(()),
-                                }
+                                });
+                            let data = match data {
+                                Ok(v) => v,
+                                Err(_) => continue,
+                            };
+                            let mut data = data.lock().map_err(|e| {
+                                warn!("unable to lock data struct: {}", e);
+                                ()
+                            }).and_then(|mut v| {
+                                v.parse(&line[1])
                             });
-                            info!("data: {:?}", data);
                         }
                     });
                 }
-                
             }
         });
 
