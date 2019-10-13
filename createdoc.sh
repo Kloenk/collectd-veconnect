@@ -8,7 +8,7 @@ if [ "$TRAVIS_BRANCH" == "master" ]; then
 <html>
     <head>
         <meta charset="utf-8" lang="en"/>
-        <meta http-equiv="refresh" content="0; URL='/doc/collectd_veconnect/'" />
+        <meta http-equiv="refresh" content="0; URL='/collectd-veconnect/doc/veconnect/'" />
     </head>
 </html>
 EOF
