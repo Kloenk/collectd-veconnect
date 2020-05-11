@@ -18,7 +18,7 @@ default = [ ]
 log = "0.4.8"
 
 [dependencies.collectd-plugin]
-version = "0.10.0"
+version = "0.13.0"
 features = ["serde"]
 #path = "../collectd-rust-plugin/"
 
